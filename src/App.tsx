@@ -19,6 +19,15 @@ function App() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // 新しいTodoを作成
+    const newTodo: Todo = {
+      inputValue: inputValue,
+      id: todos.length,
+      checked: false,
+    };
+
+    setTodos([newTodo, ...todos]);
+    setInputValue('')
   };
 
 
@@ -30,6 +39,7 @@ function App() {
           <input type="text" onChange={(e) => handleChange(e)} className="inputText" />
           <input type="submit" value="作成" className="submitButton" />
         </form>
+        <ul></ul>
       </div>
     </div>
   );
