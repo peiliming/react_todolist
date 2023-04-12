@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState<Todo[]>([]);
 
   type Todo = {
@@ -17,6 +17,7 @@ function App() {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setInputValue('');
     e.preventDefault();
 
     // 新しいTodoを作成
@@ -39,7 +40,7 @@ function App() {
     });
 
     setTodos(newTodos);
-  }
+  };
 
   const handleChecked = (id: number, checked: boolean) => { 
     const newTodos = todos.map((todo) => {
@@ -50,7 +51,12 @@ function App() {
     });
 
     setTodos(newTodos);
-  }
+  };
+
+  const handleDelete = (id: number) => {
+    const newTodos = todos.filter((todo) => todo.id !== id); // todo.id（todosの中のデータを一個ずつ見ていって、）結果 は idと一致していないことで、trueになる。つまり、tureになった項目は残る。
+    setTodos(newTodos);
+  };
 
 
   return (
@@ -62,8 +68,8 @@ function App() {
           <input type="submit" value="作成" className="submitButton" />
         </form>
         <ul className="todoList">
-          {todos.map((todo) => (
-            <li key={todo.id}>
+        {todos.map((todo) => (
+          <li key={todo.id}>
             <input 
               type="text"
               onChange={(e) => handleEdit(todo.id, e.target.value)}
@@ -73,8 +79,10 @@ function App() {
             <input 
               type="checkbox"
               onChange={(e) => handleChecked(todo.id, todo.checked)} />
+            <button onClick={(e) => handleDelete(todo.id)}>消</button>
+
             </li>
-          ))}
+            ))}
         </ul>
       </div>
     </div>
