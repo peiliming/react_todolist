@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -80,7 +79,6 @@ function App() {
               type="checkbox"
               onChange={(e) => handleChecked(todo.id, todo.checked)} />
             <button onClick={(e) => handleDelete(todo.id)}>消</button>
-
             </li>
             ))}
         </ul>
